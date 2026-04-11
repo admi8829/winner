@@ -32,7 +32,7 @@ WEBHOOK_PATH = f"/bot/{TOKEN}"
 
 @app.get("/")
 async def root():
-    return {"message": "Telegram Bot is running! 🚀"}
+    return {"message": "Telegram is running! 🚀"}
 
 # api/index.py ውስጥ ያለውን bot_webhook ይህንን ይመስል አድርገው
 @app.post(WEBHOOK_PATH)
