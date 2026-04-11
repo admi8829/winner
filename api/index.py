@@ -34,18 +34,25 @@ WEBHOOK_PATH = f"/bot/{TOKEN}"
 async def root():
     return {"message": "Telegram Bot is running! 🚀"}
 
+# api/index.py ውስጥ ያለውን bot_webhook ይህንን ይመስል አድርገው
 @app.post(WEBHOOK_PATH)
 async def bot_webhook(request: Request):
     try:
         update_data = await request.json()
-        logger.info(f"Received update: {update_data}") # መልእክቱ እንደደረሰ በሎግ ያሳየናል
+        print(f"DEBUG: update_data: {update_data}") # ይህንን በሎግ ውስጥ እዩት
         
-        update = Update.model_validate(update_data, context={"bot": bot})
+        # የ Update object በትክክል መፈጠሩን ለማረጋገጥ
+        update = types.Update.model_validate(update_data, context={"bot": bot})
+        
+        # ምላሽ ለመስጠት እንሞክር
         await dp.feed_update(bot, update)
+        
         return {"status": "ok"}
     except Exception as e:
-        logger.error(f"Webhook Error: {e}")
+        # ስህተት ከተፈጠረ ሎግ ላይ በግልጽ እንዲታይ
+        print(f"CRITICAL ERROR: {e}")
         return {"status": "error", "message": str(e)}
+
 
 @app.on_event("startup")
 async def on_startup():
