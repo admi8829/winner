@@ -22,7 +22,7 @@ async def start_command(message: types.Message, bot):
     
     # 3. Check Channel Subscription (Force Join)
     # ማሳሰቢያ፡ CHANNEL_ID በ config ውስጥ መገለጽ አለበት
-    CHANNEL_ID = -1003866954136 
+    CHANNEL_ID = -1003878868241
     try:
         member = await bot.get_chat_member(chat_id=CHANNEL_ID, user_id=user_id)
         if member.status in ["left", "kicked"]:
@@ -33,7 +33,7 @@ async def start_command(message: types.Message, bot):
             # የቻናል መቀላቀያ በተን
             from aiogram.utils.keyboard import InlineKeyboardBuilder
             kb = InlineKeyboardBuilder()
-            kb.row(types.InlineKeyboardButton(text="📢 Join Channel", url="https://t.me/ethiouh"))
+            kb.row(types.InlineKeyboardButton(text="📢 Join Channel", url="https://t.me/ethiohjgt"))
             kb.row(types.InlineKeyboardButton(text="🔄 ተቀላቅያለሁ / I joined", callback_data="check_join"))
             await message.answer(text, reply_markup=kb.as_markup())
             return
